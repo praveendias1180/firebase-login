@@ -11,5 +11,8 @@
     "praveendias"
   ],
   "author": "Praveen Dias",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "firebase": "^9.6.9"
+  }
 }
