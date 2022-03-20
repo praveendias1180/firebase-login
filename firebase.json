@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "target": "freeapp",
     "public": "dist",
     "ignore": [
       "firebase.json",
