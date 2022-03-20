@@ -14,14 +14,12 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
 import firebaseConfig from '../../firebase.config';
 import {
   getAuth,
   onAuthStateChanged,
   connectAuthEmulator,
   signInWithEmailAndPassword,
-  applyActionCode,
 } from 'firebase/auth';
 
 const firebaseApp = initializeApp(firebaseConfig);
