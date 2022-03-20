@@ -13,3 +13,7 @@ serve dist
 ## Firebase Auth Emulator UI
 
 ![Auth EMU UI](emu-ui.png)
+
+# Demo on Firebase
+
+![Fire Demo](firebase-login.gif)
