@@ -9,3 +9,7 @@ serve dist
 # Firebase Auth Emulators
 
 ![Auth Emulator](firebase-emu.png)
+
+## Firebase Auth Emulator UI
+
+![Auth EMU UI](emu-ui.png)
