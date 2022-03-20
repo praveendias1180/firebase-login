@@ -3,3 +3,4 @@ dist
 firebase.config.js
 **.log
 .firebaserc
+temp.file
