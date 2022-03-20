@@ -17,6 +17,15 @@ import Link from '@mui/material/Link';
 import { Link as LinkRouter } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+import { initializeApp } from 'firebase/app';
+import firebaseConfig from '../../firebase.config';
+import { getAuth, connectAuthEmulator, signOut } from 'firebase/auth';
+
+const firebaseApp = initializeApp(firebaseConfig);
+const auth = getAuth(firebaseApp);
+
+connectAuthEmulator(auth, 'http://localhost:9099');
+
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
@@ -28,6 +37,11 @@ function Copyright() {
       {'.'}
     </Typography>
   );
+}
+
+const uiSignOut = async () => {
+  await signOut(auth)
+  console.log('Signed out...')
 }
 
 const cards = [1, 2, 3];
@@ -78,7 +92,7 @@ export default function Album() {
             >
               <Button component={LinkRouter} to="signup" variant="contained">Sign Up</Button>
               <Button component={LinkRouter} to="login" variant="contained">Login</Button>
-              <Button variant="outlined">Logout</Button>
+              <Button onClick={uiSignOut} variant="outlined">Logout</Button>
             </Stack>
           </Container>
         </Box>
