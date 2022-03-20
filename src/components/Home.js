@@ -76,6 +76,7 @@ export default function Album() {
               spacing={2}
               justifyContent="center"
             >
+              <Button component={LinkRouter} to="signup" variant="contained">Sign Up</Button>
               <Button component={LinkRouter} to="login" variant="contained">Login</Button>
               <Button variant="outlined">Logout</Button>
             </Stack>
