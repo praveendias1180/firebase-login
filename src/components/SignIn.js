@@ -13,12 +13,33 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+import firebaseConfig from '../../firebase.config';
+import {
+  getAuth,
+  onAuthStateChanged,
+  connectAuthEmulator,
+  signInWithEmailAndPassword,
+  applyActionCode,
+} from 'firebase/auth';
+
+const firebaseApp = initializeApp(firebaseConfig);
+const auth = getAuth(firebaseApp);
+
+connectAuthEmulator(auth, 'http://localhost:9099');
+
 function Copyright(props) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="https://range.quest/">
+        Range Quest
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -26,16 +47,36 @@ function Copyright(props) {
   );
 }
 
+onAuthStateChanged(auth, (user) => {
+  console.log(user);
+  if (user != null) {
+    console.log('logged in!');
+  } else {
+    console.log('No user');
+  }
+});
+
 const theme = createTheme();
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get('email'),
       password: data.get('password'),
     });
+
+    try {
+      const userCredentials = await signInWithEmailAndPassword(
+        auth,
+        data.get('email'),
+        data.get('password')
+      );
+      console.log(userCredentials);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -56,7 +97,12 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
             <TextField
               margin="normal"
               required
